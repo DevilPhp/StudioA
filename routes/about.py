@@ -2,6 +2,6 @@ from flask import Blueprint, request, render_template, redirect, url_for, sessio
 
 aboutBP = Blueprint('about', __name__)
 
-@aboutBP.route('/')
-def about():
-    return render_template('/BG/about.html')
+@aboutBP.route('/<lang>/about')
+def about(lang):
+    return render_template(f'/{lang}/about.html')

@@ -4,9 +4,10 @@ import os
 # import eventlet
 # eventlet.monkey_patch()
 
-from flask import Flask, render_template, request, jsonify, redirect, url_for, session
+from flask import Flask, render_template, request, jsonify, redirect, url_for, session, Blueprint
 from flask_socketio import SocketIO, emit
 from database import DB_Functions as db
+from routes import blueprints
 from datetime import datetime
 app = Flask(__name__, static_folder='static')
 socketio = SocketIO(app, cors_allowed_origins="*")
@@ -23,14 +24,16 @@ app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
 
 db.init_db(app)
 
+for blueprint in blueprints:
+    app.register_blueprint(blueprint)
 
 @app.route('/')
 def index():
-    return redirect('/BG/')
+    return redirect(url_for('home.homeBG'))
 
-@app.route('/BG/')
-def index_BG():
-    return render_template('/BG/index.html')
+# @app.route('/BG/')
+# def index_BG():
+#     return redirect(url_for('home.home', lang='BG'))
 
 @app.route('/login', methods=['GET'])
 def login():

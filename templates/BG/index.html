@@ -26,8 +26,8 @@
                 <a href="index.html"><img src="../../static/logo/AS%20Logo-AI_2_FixedColors.png" alt="Студио А Лого" class="logo"></a>
                 <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
                 <ul class="nav-menu">
-                    <li><a href="index.html" class="active">Начало</a></li>
-                    <li><a href="about.html">За нас</a></li>
+                    <li><a href="{{ url_for('home.homeBG') }}" class="active">Начало</a></li>
+                    <li><a href="{{ url_for('about.about', lang='BG') }}">За нас</a></li>
                     <li><a href="services.html">Услуги</a></li>
                     <li><a href="treatments.html">Процедури</a></li>
                     <li><a href="gallery.html">Галерия</a></li>
