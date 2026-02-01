@@ -47,14 +47,13 @@ class SlideshowManager {
             this.slides = JSON.parse(savedSlides);
         } else {
             // Default slides
-            if (this.currentLang === 'en') {
+            if (this.currentLang === 'EN') {
                 this.slides = [
                     {
                         image: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=1200',
                         title: 'New Treatment Available',
                         description: 'Discover our latest skin rejuvenation therapy',
-                        buttonText: 'Learn More',
-                        buttonLink: 'services.html'
+                        buttonText: 'Learn More'
                     },
                     {
                         image: 'https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=1200',
@@ -75,10 +74,9 @@ class SlideshowManager {
                 this.slides = [
                     {
                         image: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=1200',
-                        title: 'Нова процедура налична',
-                        description: 'Открийте нашата най-нова терапия за подмладяване на кожата',
-                        buttonText: 'Научете повече',
-                        buttonLink: 'services.html'
+                        title: 'Нова козметична марка в салона',
+                        description: 'Открийте нашите най-нови терапии за лице',
+                        buttonText: 'Научете повече'
                     },
                     {
                         image: 'https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=1200',

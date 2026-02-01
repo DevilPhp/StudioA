@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Студио А - Професионална грижа за красота и здраве</title>
+    <title>Студио А - Премиум красота и уелнес</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../../static/css/style.css">
@@ -13,8 +13,8 @@
         <div class="top-bar">
             <div class="container">
                 <div class="top-bar-info">
-                    <a href="tel:+359892362666"><i class="fas fa-phone"></i> +359 892 362 666</a>
-                    <a href="mailto:marinelach00@gmail.com"><i class="fas fa-envelope"></i> marinelach00@gmail.com</a>
+                    <a href="tel:+1234567890"><i class="fas fa-phone"></i> +359 892 362 666</a>
+                    <a href="mailto:info@studioa.com"><i class="fas fa-envelope"></i> marinelach00@gmail.com</a>
                 </div>
                 <div class="top-bar-info">
                     <span><i class="fas fa-clock"></i> Пон - Нед: 10:00 - 20:00</span>
@@ -23,15 +23,17 @@
         </div>
         <nav class="main-nav">
             <div class="container">
-                <a href="{{ url_for('home.homeBG') }}"><img src="../../static/logo/AS%20Logo-AI_2_FixedColors.png" alt="Студио А Лого" class="logo"></a>
+                <a href="index.html"><img src="../../static/logo/AS%20Logo-AI_2_FixedColors.png" alt="Студио А Лого" class="logo"></a>
                 <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
                 <ul class="nav-menu">
                     <li><a href="{{ url_for('home.homeBG') }}" class="active">Начало</a></li>
+{#                    <li><a href="{{ url_for('about.about', lang='BG') }}">За нас</a></li>#}
                     <li><a>За нас</a></li>
                     <li><a>Услуги</a></li>
                     <li><a>Процедури</a></li>
                     <li><a>Галерия</a></li>
                     <li><a>Контакти</a></li>
+{#                    <li><a href="booking.html" class="booking-btn">Резервация</a></li>#}
                     <li class="language-switcher">
                         <button class="lang-btn" data-lang="en" hidden="hidden">EN</button>
                         <button class="lang-btn active" data-lang="bg" hidden="hidden">BG</button>
@@ -49,9 +51,8 @@
     <section class="hero">
         <div class="container">
             <h1>Добре дошли в Студио А</h1>
-            <p>Пространство, създадено с внимание към детайла, качеството и усещането за истинска грижа.</p>
-            <p>В Студио А съчетаваме професионална експертиза, висок клас процедури и индивидуален подход, за да осигурим спокойствие, комфорт и видими резултати за всеки клиент.</p>
-            <p style="font-weight: 500; margin-top: 20px;">Тук красотата не е просто резултат – тя е стандарт, отношение и преживяване.</p>
+            <p>Вашето пътуване към красота и здраве започва тук. Открийте персонализирани процедури и авангардни естетически решения, създадени специално за вас.</p>
+            <a class="hero-cta">Запазете консултация</a>
         </div>
     </section>
 
@@ -59,30 +60,30 @@
         <div class="container">
             <div class="section-title">
                 <h2>Най-популярни процедури</h2>
-                <p>Открийте нашите професионални услуги, създадени с грижа за вашата красота и здраве</p>
+                <p>Открийте нашите фирмени услуги, създадени да подчертаят вашата естествена красота</p>
             </div>
             <div class="procedures-grid">
                 <div class="procedure-card">
-                    <img src="../../static/images/laser_procedure_img.png" alt="Лазерна епилация">
+                    <img src="https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=600" alt="Естетична медицина">
                     <div class="procedure-card-content">
-                        <h3>Лазерна епилация</h3>
-                        <p>Ефективно и дълготрайно решение за гладка кожа, извършвано с една от водещите технологии в света – апаратура на Alma Lasers. Процедурата е щадяща, безопасна и подходяща за различни зони и типове кожа.</p>
+                        <h3>Естетична медицина</h3>
+                        <p>Усъвършенствани нехирургични процедури за подмладяване и подобряване на вашия вид с естествени резултати.</p>
                         <a class="learn-more">Научете повече <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
                 <div class="procedure-card">
-                    <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&h=400&fit=crop" alt="Процедури за лице">
+                    <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=600" alt="Лазерна терапия">
                     <div class="procedure-card-content">
-                        <h3>Процедури за лице</h3>
-                        <p>Професионални терапии, насочени към цялостното здраве и баланс на кожата. Подходящи за различни проблематики като акне, белези, пигментация, дехидратация и признаци на стареене.</p>
+                        <h3>Лазерна терапия</h3>
+                        <p>Най-съвременни лазерни процедури за подмладяване на кожата, епилация и различни дерматологични проблеми.</p>
                         <a class="learn-more">Научете повече <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
                 <div class="procedure-card">
-                    <img src="../../static/images/hair_procedure_img.png" alt="Терапии за коса">
+                    <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600" alt="Грижа за лице">
                     <div class="procedure-card-content">
-                        <h3>Терапии за коса</h3>
-                        <p>Възстановяващи и подхранващи терапии, създадени да подобрят здравината, блясъка и жизнеността на косата. Подходящи както за изтощена и увредена коса, така и за поддържане на доброто ѝ състояние.</p>
+                        <h3>Грижа за лице</h3>
+                        <p>Персонализирани терапии за лице с премиум продукти и техники за сияйна, здрава кожа.</p>
                         <a class="learn-more">Научете повече <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -95,13 +96,12 @@
             <div class="about-content">
                 <div class="about-text">
                     <h2>За Студио А</h2>
-                    <p>Студио А е създадено през 2022 година като осъществена идея на своята създателка Маринела Чошева – професионален козметик и гримьор с ясно призвание към грижата за хората и постигането на реални резултати.</p>
-                    <p>Концепцията на студиото е all in one – място, в което на едно място се съчетават козметични и лазерни процедури, фризьорски услуги, грим, маникюр, педикюр и терапевтичен педикюр. Създадено с мисъл за удобството, времето и комфорта на клиента.</p>
-                    <p>В основата на Студио А стоят индивидуалният подход, високият професионализъм и работата с висок клас апаратура и продукти. Стриктната хигиена, вниманието към детайла и личното отношение са стандарт, който клиентите ясно усещат и оценяват.</p>
-                    <p style="font-weight: 500;">Студиото е отворено за жени, мъже и деца – за всеки, който търси качествена грижа, доверие и време за себе си.</p>
+                    <p>Студио А е водеща клиника за красота и уелнес, посветена на предоставянето на изключителни естетически услуги. Нашият екип от опитни професионалисти съчетава изкуство с усъвършенствани медицински техники, за да постигне изключителни резултати.</p>
+                    <p>Вярваме, че красотата е лична и всяка процедура трябва да бъде съобразена с вашите уникални нужди и цели. С най-съвременни технологии и ангажимент за съвършенство, ние сме тук, за да ви помогнем да изглеждате и се чувствате най-добре.</p>
+                    <a class="hero-cta">Научете повече за нас</a>
                 </div>
                 <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=700" alt="Студио А">
+                    <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=700" alt="Студио А Клиника">
                 </div>
             </div>
         </div>
@@ -111,32 +111,28 @@
         <div class="container">
             <div class="section-title">
                 <h2>Нашите услуги</h2>
-                <p>Професионални решения за красота и здраве</p>
+                <p>Цялостни решения за красота и здраве</p>
             </div>
             <div class="categories-grid">
                 <div class="category-card">
-                    <div class="category-icon">
-                        <img src="../../static/icons/Hair-Skin--Streamline-Ultimate_b8985f_Filled.svg"
-                             height="52" width="52" class="fas fa-spa">
-                    </div>
-                    <h3>Лазерна епилация</h3>
-                    <p>Ефективно и дълготрайно решение за гладка кожа с апаратура Alma Lasers. Безопасна и щадяща за всички типове кожа.</p>
+                    <div class="category-icon"><i class="fas fa-syringe"></i></div>
+                    <h3>Инжекции</h3>
+                    <p>Ботокс, филъри и други инжекционни процедури за подмладяване на лицето.</p>
                 </div>
                 <div class="category-card">
                     <div class="category-icon"><i class="fas fa-spa"></i></div>
-                    <h3>Процедури за лице</h3>
-                    <p>Професионални терапии за акне, белези, пигментация и признаци на стареене. Индивидуален подход за всеки тип кожа.</p>
+                    <h3>Грижа за кожата</h3>
+                    <p>Професионални процедури и персонализирани режими за оптимално здраве на кожата.</p>
                 </div>
                 <div class="category-card">
-                    <div class="category-icon"><i class="fas fa-cut"></i></div>
-                    <h3>Терапии за коса</h3>
-                    <p>Възстановяващи и подхранващи терапии за здравина, блясък и жизненост на косата.</p>
+                    <div class="category-icon"><i class="fas fa-heartbeat"></i></div>
+                    <h3>Процедури за тяло</h3>
+                    <p>Контуриране, редукция на целулит и терапии за подмладяване на тялото.</p>
                 </div>
                 <div class="category-card">
-                    <div class="category-icon"><img src="../../static/icons/Health-And-Beauty-Fill--Streamline-Outlined-Fill-Material-Symbols_b8985f.svg"
-                             height="52" width="52" class="fas fa-spa"></div>
-                    <h3>Терапевтичен педикюр</h3>
-                    <p>Специализирана грижа за здравето и комфорта на стъпалата с високи хигиенни стандарти.</p>
+                    <div class="category-icon"><i class="fas fa-user-md"></i></div>
+                    <h3>Дерматология</h3>
+                    <p>Медицински дерматологични услуги за различни кожни състояния и проблеми.</p>
                 </div>
             </div>
         </div>
@@ -185,12 +181,7 @@
                     <h3>Информация за контакт</h3>
                     <div class="contact-item">
                         <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <div>
-                            <strong>Адрес:</strong><br>
-                            <a href="https://www.google.com/maps/place/CITY+HOUSE/@41.6470346,24.1590584,19.8z/data=!4m6!3m5!1s0x14ac79a3ab3f7a71:0x8231724b0aacf738!8m2!3d41.6470516!4d24.1589598!16s%2Fg%2F11vdbgmb37?entry=ttu&g_ep=EgoyMDI2MDEyOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" style="color: var(--primary-color);">
-                                ул. Тракия 5, CITY HOUSE<br>Град Доспат, Област Смолян 4831
-                            </a>
-                        </div>
+                        <div><strong>Адрес:</strong><br>ул. Тракия 5, CITY HOUSE<br>Град Доспат, Област Смолян 4831</div>
                     </div>
                     <div class="contact-item">
                         <div class="contact-icon"><i class="fas fa-phone"></i></div>
@@ -247,7 +238,7 @@
                 <div class="footer-section">
                     <h3>Бързи връзки</h3>
                     <ul>
-                        <li><a href="{{ url_for('home.homeBG') }}">Начало</a></li>
+                        <li><a href={{ url_for('home.homeBG') }}>Начало</a></li>
                         <li><a>За нас</a></li>
                         <li><a>Услуги</a></li>
                         <li><a>Контакти</a></li>
@@ -256,16 +247,16 @@
                 <div class="footer-section">
                     <h3>Услуги</h3>
                     <ul>
-                        <li><a>Лазерна епилация</a></li>
-                        <li><a>Процедури за лице</a></li>
-                        <li><a>Терапии за коса</a></li>
-                        <li><a>Терапевтичен педикюр</a></li>
+                        <li><a>Естетична медицина</a></li>
+                        <li><a>Лазерна терапия</a></li>
+                        <li><a>Грижа за лице</a></li>
+                        <li><a>Процедури за тяло</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h3>Контакти</h3>
                     <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> ул. Тракия 5, CITY HOUSE</li>
+                        <li><i class="fas fa-map-marker-alt"></i> ул. Тракия 5</li>
                         <li><i class="fas fa-phone"></i> +359 892 362 666</li>
                         <li><i class="fas fa-envelope"></i> marinelach00@gmail.com</li>
                     </ul>
