@@ -22,7 +22,7 @@ app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
     "pool_recycle": 1800
 }
 
-db.init_db(app)
+# db.init_db(app)
 
 for blueprint in blueprints:
     app.register_blueprint(blueprint)

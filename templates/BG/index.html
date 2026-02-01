@@ -13,8 +13,8 @@
         <div class="top-bar">
             <div class="container">
                 <div class="top-bar-info">
-                    <a href="tel:+1234567890"><i class="fas fa-phone"></i> +123 456 7890</a>
-                    <a href="mailto:info@studioa.com"><i class="fas fa-envelope"></i> info@studioa.com</a>
+                    <a href="tel:+1234567890"><i class="fas fa-phone"></i> +359 892 362 666</a>
+                    <a href="mailto:info@studioa.com"><i class="fas fa-envelope"></i> marinelach00@gmail.com</a>
                 </div>
                 <div class="top-bar-info">
                     <span><i class="fas fa-clock"></i> Пон - Нед: 10:00 - 20:00</span>
@@ -27,15 +27,16 @@
                 <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
                 <ul class="nav-menu">
                     <li><a href="{{ url_for('home.homeBG') }}" class="active">Начало</a></li>
-                    <li><a href="{{ url_for('about.about', lang='BG') }}">За нас</a></li>
-                    <li><a href="services.html">Услуги</a></li>
-                    <li><a href="treatments.html">Процедури</a></li>
-                    <li><a href="gallery.html">Галерия</a></li>
-                    <li><a href="contact.html">Контакти</a></li>
-                    <li><a href="booking.html" class="booking-btn">Резервация</a></li>
+{#                    <li><a href="{{ url_for('about.about', lang='BG') }}">За нас</a></li>#}
+                    <li><a>За нас</a></li>
+                    <li><a>Услуги</a></li>
+                    <li><a>Процедури</a></li>
+                    <li><a>Галерия</a></li>
+                    <li><a>Контакти</a></li>
+{#                    <li><a href="booking.html" class="booking-btn">Резервация</a></li>#}
                     <li class="language-switcher">
-                        <button class="lang-btn" data-lang="en">EN</button>
-                        <button class="lang-btn active" data-lang="bg">BG</button>
+                        <button class="lang-btn" data-lang="en" hidden="hidden">EN</button>
+                        <button class="lang-btn active" data-lang="bg" hidden="hidden">BG</button>
                     </li>
                 </ul>
             </div>
@@ -51,7 +52,7 @@
         <div class="container">
             <h1>Добре дошли в Студио А</h1>
             <p>Вашето пътуване към красота и здраве започва тук. Открийте персонализирани процедури и авангардни естетически решения, създадени специално за вас.</p>
-            <a href="booking.html" class="hero-cta">Запазете консултация</a>
+            <a class="hero-cta">Запазете консултация</a>
         </div>
     </section>
 
@@ -67,7 +68,7 @@
                     <div class="procedure-card-content">
                         <h3>Естетична медицина</h3>
                         <p>Усъвършенствани нехирургични процедури за подмладяване и подобряване на вашия вид с естествени резултати.</p>
-                        <a href="services.html#aesthetic" class="learn-more">Научете повече <i class="fas fa-arrow-right"></i></a>
+                        <a class="learn-more">Научете повече <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
                 <div class="procedure-card">
@@ -75,7 +76,7 @@
                     <div class="procedure-card-content">
                         <h3>Лазерна терапия</h3>
                         <p>Най-съвременни лазерни процедури за подмладяване на кожата, епилация и различни дерматологични проблеми.</p>
-                        <a href="services.html#laser" class="learn-more">Научете повече <i class="fas fa-arrow-right"></i></a>
+                        <a class="learn-more">Научете повече <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
                 <div class="procedure-card">
@@ -83,7 +84,7 @@
                     <div class="procedure-card-content">
                         <h3>Грижа за лице</h3>
                         <p>Персонализирани терапии за лице с премиум продукти и техники за сияйна, здрава кожа.</p>
-                        <a href="services.html#facial" class="learn-more">Научете повече <i class="fas fa-arrow-right"></i></a>
+                        <a class="learn-more">Научете повече <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -97,7 +98,7 @@
                     <h2>За Студио А</h2>
                     <p>Студио А е водеща клиника за красота и уелнес, посветена на предоставянето на изключителни естетически услуги. Нашият екип от опитни професионалисти съчетава изкуство с усъвършенствани медицински техники, за да постигне изключителни резултати.</p>
                     <p>Вярваме, че красотата е лична и всяка процедура трябва да бъде съобразена с вашите уникални нужди и цели. С най-съвременни технологии и ангажимент за съвършенство, ние сме тук, за да ви помогнем да изглеждате и се чувствате най-добре.</p>
-                    <a href="about.html" class="hero-cta">Научете повече за нас</a>
+                    <a class="hero-cta">Научете повече за нас</a>
                 </div>
                 <div class="about-image">
                     <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=700" alt="Студио А Клиника">
@@ -180,15 +181,15 @@
                     <h3>Информация за контакт</h3>
                     <div class="contact-item">
                         <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <div><strong>Адрес:</strong><br>бул. Красота 123, Офис 100<br>Град, Област 12345</div>
+                        <div><strong>Адрес:</strong><br>ул. Тракия 5, CITY HOUSE<br>Град Доспат, Област Смолян 4831</div>
                     </div>
                     <div class="contact-item">
                         <div class="contact-icon"><i class="fas fa-phone"></i></div>
-                        <div><strong>Телефон:</strong><br>+123 456 7890</div>
+                        <div><strong>Телефон:</strong><br>+359 892 362 666</div>
                     </div>
                     <div class="contact-item">
                         <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-                        <div><strong>Имейл:</strong><br>info@studioa.com</div>
+                        <div><strong>Имейл:</strong><br>marinelach00@gmail.com</div>
                     </div>
                     <div class="contact-item">
                         <div class="contact-icon"><i class="fas fa-clock"></i></div>
@@ -237,27 +238,27 @@
                 <div class="footer-section">
                     <h3>Бързи връзки</h3>
                     <ul>
-                        <li><a href="index.html">Начало</a></li>
-                        <li><a href="about.html">За нас</a></li>
-                        <li><a href="services.html">Услуги</a></li>
-                        <li><a href="contact.html">Контакти</a></li>
+                        <li><a href={{ url_for('home.homeBG') }}>Начало</a></li>
+                        <li><a>За нас</a></li>
+                        <li><a>Услуги</a></li>
+                        <li><a>Контакти</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h3>Услуги</h3>
                     <ul>
-                        <li><a href="services.html#aesthetic">Естетична медицина</a></li>
-                        <li><a href="services.html#laser">Лазерна терапия</a></li>
-                        <li><a href="services.html#facial">Грижа за лице</a></li>
-                        <li><a href="services.html#body">Процедури за тяло</a></li>
+                        <li><a>Естетична медицина</a></li>
+                        <li><a>Лазерна терапия</a></li>
+                        <li><a>Грижа за лице</a></li>
+                        <li><a>Процедури за тяло</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h3>Контакти</h3>
                     <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> бул. Красота 123</li>
-                        <li><i class="fas fa-phone"></i> +123 456 7890</li>
-                        <li><i class="fas fa-envelope"></i> info@studioa.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> ул. Тракия 5</li>
+                        <li><i class="fas fa-phone"></i> +359 892 362 666</li>
+                        <li><i class="fas fa-envelope"></i> marinelach00@gmail.com</li>
                     </ul>
                 </div>
             </div>

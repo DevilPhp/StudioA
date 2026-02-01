@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 // On root, determine where to go
                 if (targetLang === 'bg') {
-                    newPath = '/bg/index.html';
+                    newPath = '/BG/index.html';
                 } else {
                     newPath = '/en/index.html';
                 }
