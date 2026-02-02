@@ -36,7 +36,8 @@ class SlideshowManager {
     }
 
     loadSlides() {
-        const savedSlides = localStorage.getItem(`slideshow_${this.currentLang}`);
+        // const savedSlides = localStorage.getItem(`slideshow_${this.currentLang}`);
+        const savedSlides = NaN
         const savedDuration = localStorage.getItem('slideshow_duration');
 
         if (savedDuration) {
