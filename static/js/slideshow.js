@@ -74,24 +74,23 @@ class SlideshowManager {
             } else {
                 this.slides = [
                     {
-                        image: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=1200',
-                        title: 'Нова козметична марка в салона',
-                        description: 'Открийте нашите най-нови терапии за лице',
-                        buttonText: 'Научете повече'
+                        image: '../../static/images/main_pic_slide.jpeg',
+                        title: '',
+                        description: ''
                     },
                     {
-                        image: 'https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=1200',
-                        title: '20% отстъпка този месец',
-                        description: 'Специална отстъпка на всички лазерни процедури',
-                        buttonText: 'Резервирай',
-                        buttonLink: 'booking.html'
+                        image: '../../static/images/main_pic_slide_2.png',
+                        title: 'Открийте най-новите ни терапии за лице',
+                        description: ' ',
+                        buttonText: 'Научи повече',
+                        buttonLink: ' '
                     },
                     {
-                        image: 'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=1200',
-                        title: 'Премиум продукти за грижа',
-                        description: 'Разгледайте нашата ексклузивна продуктова линия',
-                        buttonText: 'Купи сега',
-                        buttonLink: 'services.html'
+                        image: '../../static/images/main_pic_slide_3.png',
+                        title: 'Ботокс терапия за коса',
+                        description: ' ',
+                        buttonText: 'Запази час',
+                        buttonLink: ' '
                     }
                 ];
             }
