@@ -74,7 +74,7 @@ class SlideshowManager {
             } else {
                 this.slides = [
                     {
-                        image: '../../static/images/cosmetic.jpeg',
+                        image: '../../static/images/cosmetic_1.jpeg',
                         title: '',
                         description: ''
                     },
