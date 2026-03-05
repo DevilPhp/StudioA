@@ -74,6 +74,11 @@ class SlideshowManager {
             } else {
                 this.slides = [
                     {
+                        image: '../../static/images/cosmetics.jpeg',
+                        title: '',
+                        description: ''
+                    },
+                    {
                         image: '../../static/images/main_pic_slide.jpeg',
                         title: '',
                         description: ''
