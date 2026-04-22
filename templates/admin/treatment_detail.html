@@ -1,0 +1,160 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ treatment.name }} — {{ treatment.client.name }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <a href="{{ url_for('admin.client_detail', client_id=treatment.client_id) }}" class="back-link">
+            &larr; {{ treatment.client.name }}
+        </a>
+        <h1>{{ treatment.name }}</h1>
+        <p class="muted">
+            Default interval {{ treatment.default_interval_days }} days
+            {% if treatment.template %}· from template "{{ treatment.template.name }}"{% endif %}
+        </p>
+    </div>
+    <form method="POST" action="{{ url_for('admin.delete_treatment', treatment_id=treatment.id) }}"
+          onsubmit="return confirm('Delete this treatment and all its sessions?');">
+        <button type="submit" class="btn btn-danger">Delete treatment</button>
+    </form>
+</div>
+
+<section class="panel">
+    <h2>Sessions</h2>
+
+    {% if sessions %}
+    <table class="procedure-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Date</th>
+                <th>Gap</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in sessions %}
+            <tr class="{% if p.completed %}row-done{% elif p.scheduled_date < today %}row-overdue{% endif %}">
+                <td>{{ p.sequence_number }}</td>
+                <td>{{ p.scheduled_date.strftime('%a, %d %b %Y') }}</td>
+                <td>
+                    {% if p.interval_days == 0 %}
+                        <span class="muted">—</span>
+                    {% else %}
+                        +{{ p.interval_days }}d
+                    {% endif %}
+                </td>
+                <td>
+                    {% if p.completed %}
+                        <span class="badge badge-done">Completed</span>
+                    {% elif p.scheduled_date < today %}
+                        <span class="badge badge-overdue">Overdue</span>
+                    {% else %}
+                        <span class="badge badge-upcoming">Upcoming</span>
+                    {% endif %}
+                </td>
+                <td class="actions-cell">
+                    <form method="POST" action="{{ url_for('admin.toggle_procedure', procedure_id=p.id) }}">
+                        <button type="submit" class="btn btn-sm">
+                            {% if p.completed %}Mark pending{% else %}Mark done{% endif %}
+                        </button>
+                    </form>
+                    <button type="button" class="btn btn-sm"
+                            onclick="openReschedule({{ p.id }}, '{{ p.scheduled_date.isoformat() }}', {{ p.sequence_number }})">
+                        Reschedule
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="muted">No sessions.</p>
+    {% endif %}
+</section>
+
+{# Reschedule modal #}
+<div id="reschedule-modal" class="modal-backdrop" style="display:none;">
+    <div class="modal">
+        <h3 id="modal-title">Reschedule session</h3>
+        <form method="POST" id="reschedule-form">
+            <label>
+                <span>New date</span>
+                <input type="date" name="new_date" id="modal-date" required>
+            </label>
+
+            <div class="cascade-question" id="cascade-section">
+                <p class="cascade-intro">What should happen to the upcoming sessions in this treatment?</p>
+
+                <label class="radio-option">
+                    <input type="radio" name="cascade_mode" value="none" checked>
+                    <div>
+                        <div class="radio-title">Only move this session</div>
+                        <div class="radio-help">Every other session stays where it is.</div>
+                    </div>
+                </label>
+
+                <label class="radio-option">
+                    <input type="radio" name="cascade_mode" value="shift">
+                    <div>
+                        <div class="radio-title">Shift upcoming sessions by the same amount</div>
+                        <div class="radio-help">
+                            If you move this session by +3 days, every later session moves +3 days too.
+                            Preserves any manual gaps you've set between later sessions.
+                        </div>
+                    </div>
+                </label>
+
+                <label class="radio-option">
+                    <input type="radio" name="cascade_mode" value="recalc">
+                    <div>
+                        <div class="radio-title">Recalculate upcoming from the new date</div>
+                        <div class="radio-help">
+                            Rebuilds later sessions using the treatment's default interval
+                            ({{ treatment.default_interval_days }} days).
+                            <strong>Any manual date changes on later sessions will be overwritten.</strong>
+                        </div>
+                    </div>
+                </label>
+            </div>
+
+            <div class="row">
+                <button type="button" class="btn btn-ghost" onclick="closeReschedule()">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+const totalSessions = {{ sessions|length }};
+
+function openReschedule(procedureId, currentDate, seqNum) {
+    const form = document.getElementById('reschedule-form');
+    form.action = "/admin/procedures/" + procedureId + "/reschedule";
+    document.getElementById('modal-date').value = currentDate;
+    document.getElementById('modal-title').textContent = 'Reschedule session #' + seqNum;
+
+    // Hide cascade options if this is the last session — nothing to cascade to.
+    const cascadeSection = document.getElementById('cascade-section');
+    cascadeSection.style.display = (seqNum >= totalSessions) ? 'none' : '';
+
+    // Always reset to the safe default on open.
+    form.querySelector('input[name="cascade_mode"][value="none"]').checked = true;
+
+    document.getElementById('reschedule-modal').style.display = 'flex';
+}
+
+function closeReschedule() {
+    document.getElementById('reschedule-modal').style.display = 'none';
+}
+
+document.getElementById('reschedule-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeReschedule();
+});
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeReschedule();
+});
+</script>
+{% endblock %}

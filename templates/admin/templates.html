@@ -1,0 +1,70 @@
+{% extends "admin/base.html" %}
+{% block title %}Procedure templates — Studio A Admin{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <h1>Procedure templates</h1>
+        <p class="muted">Reusable procedure definitions. Pick one when creating a treatment for a client.</p>
+    </div>
+</div>
+
+<section class="panel">
+    <h2>Add new template</h2>
+    <form method="POST" action="{{ url_for('admin.create_template') }}" class="form-grid">
+        <label>
+            <span>Name</span>
+            <input type="text" name="name" placeholder="e.g. Hands, Face, Bikini" required>
+        </label>
+        <label>
+            <span>Default interval (days)</span>
+            <input type="number" name="default_interval_days" min="1" max="365" value="30" required>
+        </label>
+        <button type="submit" class="btn btn-primary">Add template</button>
+    </form>
+</section>
+
+<section class="panel">
+    <h2>All templates</h2>
+
+    {% if templates %}
+    <table class="procedure-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Default interval</th>
+                <th>Created</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for t in templates %}
+            <tr>
+                <td>
+                    <form method="POST" action="{{ url_for('admin.update_template', template_id=t.id) }}"
+                          class="inline-edit" id="edit-form-{{ t.id }}">
+                        <input type="text" name="name" value="{{ t.name }}" required>
+                </td>
+                <td>
+                        <input type="number" name="default_interval_days"
+                               value="{{ t.default_interval_days }}" min="1" max="365" required
+                               style="width: 90px;">
+                </td>
+                <td>{{ t.created_at.strftime('%Y-%m-%d') }}</td>
+                <td class="actions-cell">
+                        <button type="submit" class="btn btn-sm">Save</button>
+                    </form>
+                    <form method="POST" action="{{ url_for('admin.delete_template', template_id=t.id) }}"
+                          onsubmit="return confirm('Delete this template? Existing treatments already using it keep working.');">
+                        <button type="submit" class="btn btn-sm btn-danger-sm">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="muted">No templates yet. Add your first one above.</p>
+    {% endif %}
+</section>
+{% endblock %}

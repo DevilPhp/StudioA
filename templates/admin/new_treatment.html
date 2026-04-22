@@ -1,0 +1,123 @@
+{% extends "admin/base.html" %}
+{% block title %}New treatment — {{ client.name }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <a href="{{ url_for('admin.client_detail', client_id=client.id) }}" class="back-link">&larr; {{ client.name }}</a>
+        <h1>New treatment</h1>
+        <p class="muted">Pick a saved template, or type a name to create one from scratch.</p>
+    </div>
+</div>
+
+<section class="panel">
+    <form method="POST" action="{{ url_for('admin.new_treatment', client_id=client.id) }}" class="stack" id="new-treatment-form">
+
+        {# Mode switcher #}
+        <div class="mode-switch">
+            <label class="mode-option">
+                <input type="radio" name="__mode" value="template" {% if templates %}checked{% endif %}>
+                <span>Use saved template</span>
+            </label>
+            <label class="mode-option">
+                <input type="radio" name="__mode" value="freeform" {% if not templates %}checked{% endif %}>
+                <span>Create new</span>
+            </label>
+        </div>
+
+        {# --- Template mode --- #}
+        <div id="template-fields" class="mode-fields">
+            {% if templates %}
+            <label>
+                <span>Template</span>
+                <select name="template_id" id="template-select">
+                    {% for t in templates %}
+                        <option value="{{ t.id }}" data-interval="{{ t.default_interval_days }}">
+                            {{ t.name }} (every {{ t.default_interval_days }} days)
+                        </option>
+                    {% endfor %}
+                </select>
+            </label>
+            {% else %}
+            <p class="muted">No templates yet. <a href="{{ url_for('admin.list_templates') }}">Create one</a> first, or use the "Create new" option.</p>
+            {% endif %}
+        </div>
+
+        {# --- Freeform mode --- #}
+        <div id="freeform-fields" class="mode-fields" style="display:none;">
+            <label>
+                <span>Treatment name</span>
+                <input type="text" name="freeform_name" placeholder="e.g. Hands procedure">
+            </label>
+            <label class="checkbox">
+                <input type="checkbox" name="save_as_template">
+                <span>Save this as a template for future clients</span>
+            </label>
+        </div>
+
+        {# --- Shared fields --- #}
+        <div class="form-grid">
+            <label>
+                <span>Number of sessions</span>
+                <input type="number" name="number_of_sessions" min="1" max="50" value="6" required>
+            </label>
+            <label>
+                <span>Interval (days)</span>
+                <input type="number" name="interval_days" id="interval-input"
+                       min="1" max="365" value="30" required>
+            </label>
+            <label>
+                <span>Start date</span>
+                <input type="date" name="start_date" value="{{ today.isoformat() }}" required>
+            </label>
+        </div>
+
+        <div class="row">
+            <a href="{{ url_for('admin.client_detail', client_id=client.id) }}" class="btn btn-ghost">Cancel</a>
+            <button type="submit" class="btn btn-primary">Create treatment</button>
+        </div>
+    </form>
+</section>
+
+<script>
+(function() {
+    const form = document.getElementById('new-treatment-form');
+    const modeRadios = form.querySelectorAll('input[name="__mode"]');
+    const templateFields = document.getElementById('template-fields');
+    const freeformFields = document.getElementById('freeform-fields');
+    const templateSelect = document.getElementById('template-select');
+    const intervalInput = document.getElementById('interval-input');
+
+    function updateMode() {
+        const mode = form.querySelector('input[name="__mode"]:checked').value;
+        if (mode === 'template') {
+            templateFields.style.display = '';
+            freeformFields.style.display = 'none';
+            // Ensure template_id is submitted, freeform_name is not
+            if (templateSelect) templateSelect.disabled = false;
+            form.querySelector('input[name="freeform_name"]').disabled = true;
+            form.querySelector('input[name="save_as_template"]').disabled = true;
+            syncIntervalFromTemplate();
+        } else {
+            templateFields.style.display = 'none';
+            freeformFields.style.display = '';
+            if (templateSelect) templateSelect.disabled = true;
+            form.querySelector('input[name="freeform_name"]').disabled = false;
+            form.querySelector('input[name="save_as_template"]').disabled = false;
+        }
+    }
+
+    function syncIntervalFromTemplate() {
+        if (!templateSelect) return;
+        const opt = templateSelect.options[templateSelect.selectedIndex];
+        if (opt && opt.dataset.interval) {
+            intervalInput.value = opt.dataset.interval;
+        }
+    }
+
+    modeRadios.forEach(r => r.addEventListener('change', updateMode));
+    if (templateSelect) templateSelect.addEventListener('change', syncIntervalFromTemplate);
+    updateMode();
+})();
+</script>
+{% endblock %}
