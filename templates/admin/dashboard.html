@@ -13,12 +13,13 @@
 {% if clients %}
 <div class="card-grid">
     {% for c in clients %}
-    <a href="{{ url_for('admin.client_detail', client_id=c.id) }}" class="client-card">
-        <div class="client-name">{{ c.name }}</div>
-        <div class="client-meta">
-            {{ c.procedures.count() }} procedure{% if c.procedures.count() != 1 %}s{% endif %} scheduled
-        </div>
-    </a>
+        {% set treatment_count = c.treatments.count() %}
+        <a href="{{ url_for('admin.client_detail', client_id=c.id) }}" class="client-card">
+            <div class="client-name">{{ c.name }}</div>
+            <div class="client-meta">
+                {{ treatment_count }} treatment{% if treatment_count != 1 %}s{% endif %}
+            </div>
+        </a>
     {% endfor %}
 </div>
 {% else %}
