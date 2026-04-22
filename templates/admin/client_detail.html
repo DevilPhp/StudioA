@@ -1,0 +1,89 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ client.name }} — Studio A Admin{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <a href="{{ url_for('admin.dashboard') }}" class="back-link">&larr; All clients</a>
+        <h1>{{ client.name }}</h1>
+    </div>
+    <form method="POST" action="{{ url_for('admin.delete_client', client_id=client.id) }}"
+          onsubmit="return confirm('Delete this client and all their procedures?');">
+        <button type="submit" class="btn btn-danger">Delete client</button>
+    </form>
+</div>
+
+<section class="panel">
+    <h2>Schedule procedures</h2>
+    <p class="muted">
+        Enter how many procedures, the interval between them, and the start date.
+        Re-submitting replaces the existing schedule.
+    </p>
+    <form method="POST" action="{{ url_for('admin.schedule_procedures', client_id=client.id) }}" class="form-grid">
+        <label>
+            <span>Number of procedures</span>
+            <input type="number" name="number_of_procedures" min="1" max="50" value="6" required>
+        </label>
+        <label>
+            <span>Interval (days)</span>
+            <input type="number" name="interval_days" min="1" max="365" value="30" required>
+        </label>
+        <label>
+            <span>Start date</span>
+            <input type="date" name="start_date" value="{{ today.isoformat() }}" required>
+        </label>
+        <button type="submit" class="btn btn-primary">Generate schedule</button>
+    </form>
+</section>
+
+<section class="panel">
+    <h2>Scheduled procedures</h2>
+
+    {% if procedures %}
+    <table class="procedure-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Date</th>
+                <th>Gap</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in procedures %}
+            <tr class="{% if p.completed %}row-done{% elif p.scheduled_date < today %}row-overdue{% endif %}">
+                <td>{{ p.sequence_number }}</td>
+                <td>{{ p.scheduled_date.strftime('%a, %d %b %Y') }}</td>
+                <td>
+                    {% if p.interval_days == 0 %}
+                        <span class="muted">—</span>
+                    {% else %}
+                        +{{ p.interval_days }}d
+                    {% endif %}
+                </td>
+                <td>
+                    {% if p.completed %}
+                        <span class="badge badge-done">Completed</span>
+                    {% elif p.scheduled_date < today %}
+                        <span class="badge badge-overdue">Overdue</span>
+                    {% else %}
+                        <span class="badge badge-upcoming">Upcoming</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <form method="POST" action="{{ url_for('admin.toggle_procedure', procedure_id=p.id) }}">
+                        <button type="submit" class="btn btn-sm">
+                            {% if p.completed %}Mark pending{% else %}Mark done{% endif %}
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="muted">No procedures scheduled yet. Use the form above to create a schedule.</p>
+    {% endif %}
+</section>
+{% endblock %}

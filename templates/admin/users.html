@@ -1,0 +1,67 @@
+{% extends "admin/base.html" %}
+{% block title %}Users — Studio A Admin{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <h1>Users</h1>
+        <p class="muted">Only admins can create, promote, or delete staff accounts.</p>
+    </div>
+</div>
+
+<section class="panel">
+    <h2>Create new user</h2>
+    <form method="POST" action="{{ url_for('admin.create_user') }}" class="form-grid">
+        <label>
+            <span>Username</span>
+            <input type="text" name="username" required>
+        </label>
+        <label>
+            <span>Password (min 6)</span>
+            <input type="password" name="password" minlength="6" required>
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" name="is_admin">
+            <span>Grant admin rights</span>
+        </label>
+        <button type="submit" class="btn btn-primary">Create user</button>
+    </form>
+</section>
+
+<section class="panel">
+    <h2>All users</h2>
+    <table class="procedure-table">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Created</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for u in users %}
+            <tr>
+                <td>{{ u.username }}{% if u.id == session.get('user_id') %} <span class="muted">(you)</span>{% endif %}</td>
+                <td>
+                    {% if u.is_admin %}
+                        <span class="badge badge-done">Admin</span>
+                    {% else %}
+                        <span class="badge badge-upcoming">Staff</span>
+                    {% endif %}
+                </td>
+                <td>{{ u.created_at.strftime('%Y-%m-%d') }}</td>
+                <td>
+                    {% if u.id != session.get('user_id') %}
+                    <form method="POST" action="{{ url_for('admin.delete_user', user_id=u.id) }}"
+                          onsubmit="return confirm('Delete user {{ u.username }}? Their clients will be deleted too.');">
+                        <button type="submit" class="btn btn-sm btn-danger-sm">Delete</button>
+                    </form>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

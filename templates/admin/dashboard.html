@@ -1,0 +1,30 @@
+{% extends "admin/base.html" %}
+{% block title %}Dashboard — Studio A Admin{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <h1>Clients</h1>
+        <p class="muted">Manage your clients and their laser procedure schedules.</p>
+    </div>
+    <a href="{{ url_for('admin.new_client') }}" class="btn btn-primary">+ New client</a>
+</div>
+
+{% if clients %}
+<div class="card-grid">
+    {% for c in clients %}
+    <a href="{{ url_for('admin.client_detail', client_id=c.id) }}" class="client-card">
+        <div class="client-name">{{ c.name }}</div>
+        <div class="client-meta">
+            {{ c.procedures.count() }} procedure{% if c.procedures.count() != 1 %}s{% endif %} scheduled
+        </div>
+    </a>
+    {% endfor %}
+</div>
+{% else %}
+<div class="empty-state">
+    <p>No clients yet.</p>
+    <a href="{{ url_for('admin.new_client') }}" class="btn btn-primary">Create your first client</a>
+</div>
+{% endif %}
+{% endblock %}

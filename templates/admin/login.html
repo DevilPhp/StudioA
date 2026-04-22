@@ -1,0 +1,22 @@
+{% extends "admin/base.html" %}
+{% block title %}Login — Studio A Admin{% endblock %}
+
+{% block content %}
+<div class="auth-card">
+    <h1>Log in</h1>
+    <p class="muted">Sign in to manage clients and procedures.</p>
+
+    <form method="POST" action="{{ url_for('auth.login') }}" class="stack">
+        <label>
+            <span>Username</span>
+            <input type="text" name="username" required autofocus>
+        </label>
+        <label>
+            <span>Password</span>
+            <input type="password" name="password" required>
+        </label>
+
+        <button type="submit" class="btn btn-primary btn-block">Log in</button>
+    </form>
+</div>
+{% endblock %}

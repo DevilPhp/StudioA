@@ -1,0 +1,21 @@
+{% extends "admin/base.html" %}
+{% block title %}New client — Studio A Admin{% endblock %}
+
+{% block content %}
+<div class="auth-card">
+    <h1>New client</h1>
+    <p class="muted">Add a client, then schedule their procedures on the next screen.</p>
+
+    <form method="POST" action="{{ url_for('admin.new_client') }}" class="stack">
+        <label>
+            <span>Client name</span>
+            <input type="text" name="name" required autofocus>
+        </label>
+
+        <div class="row">
+            <a href="{{ url_for('admin.dashboard') }}" class="btn btn-ghost">Cancel</a>
+            <button type="submit" class="btn btn-primary">Create client</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

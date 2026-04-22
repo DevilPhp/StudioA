@@ -1,0 +1,41 @@
+{# Shared layout for all admin / auth pages #}
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Studio A — Admin{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+    <div class="admin-shell">
+        {% if session.get('user_id') %}
+        <header class="admin-header">
+            <a href="{{ url_for('admin.dashboard') }}" class="brand">Studio A · Admin</a>
+            <nav class="admin-nav">
+                <a href="{{ url_for('admin.dashboard') }}">Clients</a>
+                {% if session.get('is_admin') %}
+                    <a href="{{ url_for('admin.list_users') }}">Users</a>
+                {% endif %}
+                <span class="who">👤 {{ session.get('username') }}{% if session.get('is_admin') %} <span class="tag tag-admin">admin</span>{% endif %}</span>
+                <a href="{{ url_for('auth.logout') }}" class="btn btn-ghost">Logout</a>
+            </nav>
+        </header>
+        {% endif %}
+
+        <main class="admin-main">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flashes">
+                        {% for category, msg in messages %}
+                            <div class="flash flash-{{ category }}">{{ msg }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+</body>
+</html>
