@@ -8,7 +8,7 @@ import os
 # In production (gunicorn on the server), real env vars take precedence;
 # python-dotenv only fills in what isn't already set.
 from dotenv import load_dotenv
-# load_dotenv()
+load_dotenv()
 
 from urllib.parse import quote_plus
 
@@ -53,17 +53,17 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 # Fall back to a random one only if FLASK_SECRET_KEY isn't set.
 app.secret_key = os.environ.get('FLASK_SECRET_KEY') or os.urandom(24)
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = _build_database_uri()
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-# app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
-#     "pool_size": 10,
-#     "max_overflow": 20,
-#     "pool_timeout": 30,
-#     "pool_recycle": 1800,
-# }
+app.config['SQLALCHEMY_DATABASE_URI'] = _build_database_uri()
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+    "pool_size": 10,
+    "max_overflow": 20,
+    "pool_timeout": 30,
+    "pool_recycle": 1800,
+}
 
 # Bind SQLAlchemy, create tables, register CLI commands (seed-admin, etc.)
-# db.init_db(app)
+db.init_db(app)
 
 for blueprint in blueprints:
     app.register_blueprint(blueprint)
