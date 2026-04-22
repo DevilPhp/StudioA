@@ -73,11 +73,11 @@ class SlideshowManager {
                 ];
             } else {
                 this.slides = [
-                    {
-                        image: '../../static/images/cosmetic_1.jpeg',
-                        title: '',
-                        description: ''
-                    },
+                    // {
+                    //     image: '../../static/images/cosmetic_1.jpg',
+                    //     title: '',
+                    //     description: ''
+                    // },
                     {
                         image: '../../static/images/main_pic_slide.jpeg',
                         title: '',
