@@ -13,10 +13,12 @@
             {% if treatment.template %}· from template "{{ treatment.template.name }}"{% endif %}
         </p>
     </div>
-    <form method="POST" action="{{ url_for('admin.delete_treatment', treatment_id=treatment.id) }}"
-          onsubmit="return confirm('Delete this treatment and all its sessions?');">
-        <button type="submit" class="btn btn-danger">Delete treatment</button>
-    </form>
+    <div class="header-actions">
+        <form method="POST" action="{{ url_for('admin.delete_treatment', treatment_id=treatment.id) }}"
+              onsubmit="return confirm('Delete this treatment and all its sessions?');">
+            <button type="submit" class="btn btn-danger">Delete treatment</button>
+        </form>
+    </div>
 </div>
 
 <section class="panel">
@@ -36,16 +38,16 @@
         <tbody>
             {% for p in sessions %}
             <tr class="{% if p.completed %}row-done{% elif p.scheduled_date < today %}row-overdue{% endif %}">
-                <td>{{ p.sequence_number }}</td>
-                <td>{{ p.scheduled_date.strftime('%a, %d %b %Y') }}</td>
-                <td>
+                <td data-label="Session">#{{ p.sequence_number }}</td>
+                <td data-label="Date">{{ p.scheduled_date.strftime('%a, %d %b %Y') }}</td>
+                <td data-label="Gap">
                     {% if p.interval_days == 0 %}
                         <span class="muted">—</span>
                     {% else %}
                         +{{ p.interval_days }}d
                     {% endif %}
                 </td>
-                <td>
+                <td data-label="Status">
                     {% if p.completed %}
                         <span class="badge badge-done">Completed</span>
                     {% elif p.scheduled_date < today %}
@@ -54,7 +56,7 @@
                         <span class="badge badge-upcoming">Upcoming</span>
                     {% endif %}
                 </td>
-                <td class="actions-cell">
+                <td class="actions-cell" data-label="Actions">
                     <form method="POST" action="{{ url_for('admin.toggle_procedure', procedure_id=p.id) }}">
                         <button type="submit" class="btn btn-sm">
                             {% if p.completed %}Mark pending{% else %}Mark done{% endif %}
@@ -136,11 +138,9 @@ function openReschedule(procedureId, currentDate, seqNum) {
     document.getElementById('modal-date').value = currentDate;
     document.getElementById('modal-title').textContent = 'Reschedule session #' + seqNum;
 
-    // Hide cascade options if this is the last session — nothing to cascade to.
     const cascadeSection = document.getElementById('cascade-section');
     cascadeSection.style.display = (seqNum >= totalSessions) ? 'none' : '';
 
-    // Always reset to the safe default on open.
     form.querySelector('input[name="cascade_mode"][value="none"]').checked = true;
 
     document.getElementById('reschedule-modal').style.display = 'flex';

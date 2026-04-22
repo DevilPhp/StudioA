@@ -3,7 +3,12 @@
 <html lang="bg">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {# width=device-width  -> use the real device width
+       initial-scale=1.0   -> no initial zoom
+       maximum-scale=1.0   -> cap the zoom level
+       user-scalable=no    -> disable pinch-to-zoom (explicitly requested) #}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#b8985f">
     <title>{% block title %}Studio A — Admin{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
 </head>

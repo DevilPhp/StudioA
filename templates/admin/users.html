@@ -36,27 +36,34 @@
                 <th>Username</th>
                 <th>Role</th>
                 <th>Created</th>
-                <th></th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             {% for u in users %}
             <tr>
-                <td>{{ u.username }}{% if u.id == session.get('user_id') %} <span class="muted">(you)</span>{% endif %}</td>
-                <td>
+                <td data-label="Username">
+                    {{ u.username }}
+                    {% if u.id == session.get('user_id') %}
+                        <span class="muted">(you)</span>
+                    {% endif %}
+                </td>
+                <td data-label="Role">
                     {% if u.is_admin %}
                         <span class="badge badge-done">Admin</span>
                     {% else %}
                         <span class="badge badge-upcoming">Staff</span>
                     {% endif %}
                 </td>
-                <td>{{ u.created_at.strftime('%Y-%m-%d') }}</td>
-                <td>
+                <td data-label="Created">{{ u.created_at.strftime('%Y-%m-%d') }}</td>
+                <td class="actions-cell" data-label="Actions">
                     {% if u.id != session.get('user_id') %}
                     <form method="POST" action="{{ url_for('admin.delete_user', user_id=u.id) }}"
                           onsubmit="return confirm('Delete user {{ u.username }}? Their clients will be deleted too.');">
                         <button type="submit" class="btn btn-sm btn-danger-sm">Delete</button>
                     </form>
+                    {% else %}
+                        <span class="muted">—</span>
                     {% endif %}
                 </td>
             </tr>
